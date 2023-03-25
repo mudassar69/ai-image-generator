@@ -1,7 +1,12 @@
 'use client'
 import React, { useState } from 'react'
+import fetchSuggestions from '../lib/fetchSuggestions'
+import useSWR from 'swr'
 function PromptInput() {
     const [input, setinput] = useState('')
+    const [data, error, isLoading, mutate, isValidating] = useSWR('/api/suggestion', fetchSuggestions, {
+        revalidateOnFocus: false
+    })
     return (
         <div className="m-10">
            <form className="flex flex-col lg:flex-row shadow-md shadow-slate-400/10 border">
